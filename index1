@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Volleyball Quiz</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body>
+
+<h1>Volleyball Quiz</h1>
+
+<div id="timer">Time: 10:00</div>
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<form id="quizForm">
+
+    <div class="question">
+        <div class="question-title">Q1. How many players are on the court in one volleyball team?</div>
+        <label class="option"><input type="radio" name="q1" value="0"><span>5 players</span></label>
+        <label class="option"><input type="radio" name="q1" value="1"><span>6 players</span></label>
+        <label class="option"><input type="radio" name="q1" value="0"><span>7 players</span></label>
+        <label class="option"><input type="radio" name="q1" value="0"><span>8 players</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q2. What is the height of the men's volleyball net?</div>
+        <label class="option"><input type="radio" name="q2" value="0"><span>2.24 m</span></label>
+        <label class="option"><input type="radio" name="q2" value="1"><span>2.43 m</span></label>
+        <label class="option"><input type="radio" name="q2" value="0"><span>2.50 m</span></label>
+        <label class="option"><input type="radio" name="q2" value="0"><span>2.60 m</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q3. Which country invented volleyball?</div>
+        <label class="option"><input type="radio" name="q3" value="1"><span>USA</span></label>
+        <label class="option"><input type="radio" name="q3" value="0"><span>India</span></label>
+        <label class="option"><input type="radio" name="q3" value="0"><span>Japan</span></label>
+        <label class="option"><input type="radio" name="q3" value="0"><span>Brazil</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q4. What is the maximum number of touches allowed per team?</div>
+        <label class="option"><input type="radio" name="q4" value="0"><span>2</span></label>
+        <label class="option"><input type="radio" name="q4" value="1"><span>3</span></label>
+        <label class="option"><input type="radio" name="q4" value="0"><span>4</span></label>
+        <label class="option"><input type="radio" name="q4" value="0"><span>5</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q5. What is a powerful attacking hit called?</div>
+        <label class="option"><input type="radio" name="q5" value="0"><span>Serve</span></label>
+        <label class="option"><input type="radio" name="q5" value="1"><span>Spike</span></label>
+        <label class="option"><input type="radio" name="q5" value="0"><span>Pass</span></label>
+        <label class="option"><input type="radio" name="q5" value="0"><span>Block</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q6. What starts a rally in volleyball?</div>
+        <label class="option"><input type="radio" name="q6" value="0"><span>Pass</span></label>
+        <label class="option"><input type="radio" name="q6" value="1"><span>Serve</span></label>
+        <label class="option"><input type="radio" name="q6" value="0"><span>Set</span></label>
+        <label class="option"><input type="radio" name="q6" value="0"><span>Block</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q7. What is the role of a libero?</div>
+        <label class="option"><input type="radio" name="q7" value="0"><span>Attacker</span></label>
+        <label class="option"><input type="radio" name="q7" value="1"><span>Defender</span></label>
+        <label class="option"><input type="radio" name="q7" value="0"><span>Server</span></label>
+        <label class="option"><input type="radio" name="q7" value="0"><span>Referee</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q8. How many sets are played in a standard match?</div>
+        <label class="option"><input type="radio" name="q8" value="0"><span>3</span></label>
+        <label class="option"><input type="radio" name="q8" value="1"><span>5</span></label>
+        <label class="option"><input type="radio" name="q8" value="0"><span>7</span></label>
+        <label class="option"><input type="radio" name="q8" value="0"><span>9</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q9. Which hit is used to receive the serve?</div>
+        <label class="option"><input type="radio" name="q9" value="1"><span>Bump</span></label>
+        <label class="option"><input type="radio" name="q9" value="0"><span>Spike</span></label>
+        <label class="option"><input type="radio" name="q9" value="0"><span>Serve</span></label>
+        <label class="option"><input type="radio" name="q9" value="0"><span>Block</span></label>
+    </div>
+
+    <div class="question">
+        <div class="question-title">Q10. What is it called when the ball lands outside the boundary?</div>
+        <label class="option"><input type="radio" name="q10" value="0"><span>In</span></label>
+        <label class="option"><input type="radio" name="q10" value="1"><span>Out</span></label>
+        <label class="option"><input type="radio" name="q10" value="0"><span>Fault</span></label>
+        <label class="option"><input type="radio" name="q10" value="0"><span>Net</span></label>
+    </div>
+
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+
+</form>
+
+<div id="result"></div>
+
+<script>
+let time = 600;
+let timer = setInterval(function () {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
+    sec = sec < 10 ? "0" + sec : sec;
+
+    document.getElementById("timer").innerText = "Time: " + min + ":" + sec;
+    time--;
+
+    if (time < 0) {
+        clearInterval(timer);
+        alert("Time's up!");
+        document.getElementById("quizForm").submit();
+    }
+}, 1000);
+
+const form = document.getElementById("quizForm");
+const progressBar = document.getElementById("progressBar");
+
+form.addEventListener("change", function () {
+    let answered = 0;
+    let total = 10;
+
+    for (let i = 1; i <= total; i++) {
+        let options = document.getElementsByName("q" + i);
+        for (let opt of options) {
+            if (opt.checked) {
+                answered++;
+                break;
+            }
+        }
+    }
+
+    progressBar.style.width = (answered / total) * 100 + "%";
+});
+
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let score = 0;
+    let total = 10;
+
+    for (let i = 1; i <= total; i++) {
+        let options = document.getElementsByName("q" + i);
+        for (let opt of options) {
+            if (opt.checked && opt.value == "1") {
+                score++;
+            }
+        }
+    }
+
+    let wrong = total - score;
+
+    document.getElementById("result").innerHTML =
+        "✅ Correct: " + score + "<br>❌ Wrong: " + wrong;
+});
+</script>
+
+</body>
+</html>
