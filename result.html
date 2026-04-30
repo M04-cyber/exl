@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Result</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: lightgray;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h2 {
+            text-align: center;
+            color: black;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: red;
+            font-weight: bold;
+        }
+
+        .answer {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Quiz Result</h2>
+    <div id="result"></div>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    const answers = {
+        q1: {value: "1", text: "6 players"},
+        q2: {value: "1", text: "2.43 m"},
+        q3: {value: "1", text: "USA"},
+        q4: {value: "1", text: "3"},
+        q5: {value: "1", text: "Spike"},
+        q6: {value: "1", text: "Serve"},
+        q7: {value: "1", text: "Defender"},
+        q8: {value: "1", text: "5"},
+        q9: {value: "1", text: "Bump"},
+        q10: {value: "1", text: "Out"}
+    };
+
+    let score = 0;
+    let output = "";
+
+    for (let i = 1; i <= 10; i++) {
+        let q = "q" + i;
+        let userAns = params.get(q);
+        let correct = answers[q];
+
+        if (userAns === correct.value) {
+            score++;
+            output += `<p>Q${i}: <span class="correct">Correct ✅</span></p>`;
+        } else {
+            output += `<p>Q${i}: <span class="wrong">Wrong ❌</span><br>
+                       Correct Answer: <span class="answer">${correct.text}</span></p>`;
+        }
+    }
+
+    output += `<h3 style="text-align:center;">Total Score: ${score}/10</h3>`;
+
+    document.getElementById("result").innerHTML = output;
+</script>
+
+</body>
+</html>
